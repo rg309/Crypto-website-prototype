@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decentralized Identity & Asset Management</title>
+    <style>
+        /* Modern Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a; /* Dark background */
+            color: #ffffff; /* White text */
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: rgba(10, 10, 10, 0.9); /* Semi-transparent black */
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px); /* Blur effect */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav button {
+            background: transparent;
+            color: #ffffff;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            margin: 0 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        nav button:hover {
+            color: #00aaff; /* Bright blue on hover */
+            transform: translateY(-2px);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1a1a1a, #000033); /* Black to dark blue gradient */
+            color: #ffffff;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #00aaff, #0077cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        /* Container for Cards */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Cards */
+        .card {
+            background: #1a1a1a; /* Dark card background */
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 170, 255, 0.2);
+        }
+
+        .card h2 {
+            color: #00aaff; /* Bright blue for headings */
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .card button {
+            background: linear-gradient(135deg, #00aaff, #0077cc); /* Blue gradient */
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 170, 255, 0.4);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .chart {
+            background: #1a1a1a; /* Dark card background */
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .buy-button {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #00aaff, #0077cc);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .buy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 170, 255, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #000033; /* Dark blue footer */
+            color: #ffffff;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <button onclick="window.location.href='index.html'">Home</button>
+        <button onclick="window.location.href='account.html'">Account</button>
+        <button onclick="window.location.href='buy-crypto.html'">Buy Crypto</button>
+        <button onclick="window.location.href='terms.html'">Terms</button>
+        <button onclick="window.location.href='about.html'">About</button>
+        <button onclick="window.location.href='contact.html'">Contact</button>
+    </nav>
+
+    <!-- Header -->
+    <header id="home">
+        <h1>Decentralized Identity & Asset Management</h1>
+        <p>Secure, Transparent, and User-Controlled</p>
+    </header>
+
+    <!-- Live Charts Section -->
+    <div class="chart-container">
+        <!-- Bitcoin Chart -->
+        <div class="chart">
+            <div class="tradingview-widget-container">
+                <div id="btc-chart"></div>
+            </div>
+            <button class="buy-button" onclick="window.location.href='https://www.binance.com/en/buy-BTC'">Buy BTC</button>
+        </div>
+
+        <!-- Ethereum Chart -->
+        <div class="chart">
+            <div class="tradingview-widget-container">
+                <div id="eth-chart"></div>
+            </div>
+            <button class="buy-button" onclick="window.location.href='https://www.binance.com/en/buy-ETH'">Buy ETH</button>
+        </div>
+
+        <!-- Ripple Chart -->
+        <div class="chart">
+            <div class="tradingview-widget-container">
+                <div id="xrp-chart"></div>
+            </div>
+            <button class="buy-button" onclick="window.location.href='https://www.binance.com/en/buy-XRP'">Buy XRP</button>
+        </div>
+
+        <!-- Solana Chart -->
+        <div class="chart">
+            <div class="tradingview-widget-container">
+                <div id="sol-chart"></div>
+            </div>
+            <button class="buy-button" onclick="window.location.href='https://www.binance.com/en/buy-SOL'">Buy SOL</button>
+        </div>
+
+        <!-- Dogecoin Chart -->
+        <div class="chart">
+            <div class="tradingview-widget-container">
+                <div id="doge-chart"></div>
+            </div>
+            <button class="buy-button" onclick="window.location.href='https://www.binance.com/en/buy-DOGE'">Buy DOGE</button>
+        </div>
+
+        <!-- Cardano Chart -->
+        <div class="chart">
+            <div class="tradingview-widget-container">
+                <div id="ada-chart"></div>
+            </div>
+            <button class="buy-button" onclick="window.location.href='https://www.binance.com/en/buy-ADA'">Buy ADA</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Identity Verification Card -->
+        <div class="card">
+            <h2>Identity Verification</h2>
+            <p>Verify your identity securely using blockchain technology.</p>
+            <button id="verifyIdentity">Verify Identity</button>
+        </div>
+
+        <!-- Digital Asset Management Card -->
+        <div class="card">
+            <h2>Digital Asset Management</h2>
+            <p>Manage your digital assets with full control and transparency.</p>
+            <button id="manageAssets">Manage Assets</button>
+        </div>
+
+        <!-- Wallet Integration Card -->
+        <div class="card">
+            <h2>Wallet Integration</h2>
+            <p>Connect your wallet to get started.</p>
+            <button id="connectWallet">Connect Wallet</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Decentralized Platform. All rights reserved.</p>
+    </footer>
+
+    <!-- TradingView Scripts -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+        // Bitcoin Chart
+        new TradingView.widget({
+            "container_id": "btc-chart",
+            "width": "100%",
+            "height": "400",
+            "symbol": "BINANCE:BTCUSDT",
+            "interval": "D",
+            "timezone": "Etc/UTC",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "toolbar_bg": "#1a1a1a",
+            "enable_publishing": false,
+            "hide_side_toolbar": false,
+            "allow_symbol_change": true,
+            "details": true,
+            "studies": ["RSI@tv-basicstudies"]
+        });
+
+        // Ethereum Chart
+        new TradingView.widget({
+            "container_id": "eth-chart",
+            "width": "100%",
+            "height": "400",
+            "symbol": "BINANCE:ETHUSDT",
+            "interval": "D",
+            "timezone": "Etc/UTC",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "toolbar_bg": "#1a1a1a",
+            "enable_publishing": false,
+            "hide_side_toolbar": false,
+            "allow_symbol_change": true,
+            "details": true,
+            "studies": ["RSI@tv-basicstudies"]
+        });
+
+        // Ripple Chart
+        new TradingView.widget({
+            "container_id": "xrp-chart",
+            "width": "100%",
+            "height": "400",
+            "symbol": "BINANCE:XRPUSDT",
+            "interval": "D",
+            "timezone": "Etc/UTC",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "toolbar_bg": "#1a1a1a",
+            "enable_publishing": false,
+            "hide_side_toolbar": false,
+            "allow_symbol_change": true,
+            "details": true,
+            "studies": ["RSI@tv-basicstudies"]
+        });
+
+        // Solana Chart
+        new TradingView.widget({
+            "container_id": "sol-chart",
+            "width": "100%",
+            "height": "400",
+            "symbol": "BINANCE:SOLUSDT",
+            "interval": "D",
+            "timezone": "Etc/UTC",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "toolbar_bg": "#1a1a1a",
+            "enable_publishing": false,
+            "hide_side_toolbar": false,
+            "allow_symbol_change": true,
+            "details": true,
+            "studies": ["RSI@tv-basicstudies"]
+        });
+
+        // Dogecoin Chart
+        new TradingView.widget({
+            "container_id": "doge-chart",
+            "width": "100%",
+            "height": "400",
+            "symbol": "BINANCE:DOGEUSDT",
+            "interval": "D",
+            "timezone": "Etc/UTC",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "toolbar_bg": "#1a1a1a",
+            "enable_publishing": false,
+            "hide_side_toolbar": false,
+            "allow_symbol_change": true,
+            "details": true,
+            "studies": ["RSI@tv-basicstudies"]
+        });
+
+        // Cardano Chart
+        new TradingView.widget({
+            "container_id": "ada-chart",
+            "width": "100%",
+            "height": "400",
+            "symbol": "BINANCE:ADAUSDT",
+            "interval": "D",
+            "timezone": "Etc/UTC",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "toolbar_bg": "#1a1a1a",
+            "enable_publishing": false,
+            "hide_side_toolbar": false,
+            "allow_symbol_change": true,
+            "details": true,
+            "studies": ["RSI@tv-basicstudies"]
+        });
+    </script>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Example: Connect Wallet Button
+        document.getElementById('connectWallet').addEventListener('click', () => {
+            alert('Wallet connection functionality will be implemented here.');
+            // Integrate with a wallet like MetaMask or WalletConnect
+        });
+
+        // Example: Verify Identity Button
+        document.getElementById('verifyIdentity').addEventListener('click', () => {
+            alert('Identity verification functionality will be implemented here.');
+            // Integrate with a decentralized identity solution (e.g., DID)
+        });
+
+        // Example: Manage Assets Button
+        document.getElementById('manageAssets').addEventListener('click', () => {
+            alert('Digital asset management functionality will be implemented here.');
+            // Integrate with a blockchain for asset management
+        });
+    </script>
+</body>
+</html>
